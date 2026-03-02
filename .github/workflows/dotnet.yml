@@ -1,0 +1,26 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '10.0.x'
+    
+    - name: Old library works with coverage
+      run: |
+        dotnet run --project OldTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-old
+        echo "Old library has correct coverage:"
+        cat coverage-old/*
+      
+    - name: New library not works with coverage
+      run: |
+        dotnet run --project NewTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-new
+        echo "New library has not correct coverage:"
+        cat coverage-new/*
+      
