@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CodeLibrary/CodeLibrary.csproj" />
+  <Project Path="NewTUnitTests/NewTUnitTests.csproj" />
+  <Project Path="OldTUnitTests/OldTUnitTests.csproj" />
+</Solution>
