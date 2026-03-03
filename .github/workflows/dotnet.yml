@@ -9,13 +9,21 @@ jobs:
        
     - name: Old library works with coverage
       run: |
-        dotnet run --project OldTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-old --junit-output-path junit/junit.xml --report-html-filename report/report.html
+        dotnet run --project OldTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-old
         echo "Old library has correct coverage:"
         cat coverage-old/*
       
     - name: New library not works with coverage
       run: |
-        dotnet run --project NewTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-new --junit-output-path junit/junit.xml --report-html-filename report/report.html
+        dotnet run --project NewTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-new
         echo "New library has not correct coverage:"
         cat coverage-new/*
-      
+
+    - name: After installing libxml2
+      run: 'apt-get update && apt-get install -y libxml2-dev'
+
+    - name: New library with libxml2 works with coverage
+      run: |
+        dotnet run --project NewTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-new-2
+        echo "New library with libxml2 has correct coverage:"
+        cat coverage-new-2/*
