@@ -6,12 +6,7 @@ jobs:
     container: mcr.microsoft.com/dotnet/sdk:9.0.311
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '9.0.311'
-    
+       
     - name: Old library works with coverage
       run: |
         dotnet run --project OldTUnitTests --coverage --coverage-output-format cobertura --results-directory coverage-old --junit-output-path junit/junit.xml --report-html-filename report/report.html
